@@ -28,7 +28,7 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <Button Content="Backspace" Margin="1" Name="btnDel" Grid.Column="1" Command="{Binding DataContext.DeleteCommand,ElementName=MainGrid}" />
+            <Button Content="Backspace" Background="#3D454B" Margin="1" Name="btnDel" Grid.Column="1" Command="{Binding DataContext.DeleteCommand,ElementName=MainGrid}" />
         </Grid>
 
         <Grid Margin="30,0,0,0" Grid.Row="1">
@@ -52,7 +52,7 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <Button Content="Enter" Margin="1" Name="btnEnter" Grid.Column="1" Command="{Binding Command,ElementName=usercontrol}"  />
+            <Button Content="Enter" Background="#3D454B" Margin="1" Name="btnEnter" Grid.Column="1" Command="{Binding Command,ElementName=usercontrol}"  />
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
@@ -66,7 +66,7 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <Button Content="Shift" Margin="1" Name="btnShift" Grid.Column="1" Command="{Binding DataContext.ShiftCommand,ElementName=MainGrid}" />
+            <Button Content="Shift" Background="#3D454B" Margin="1" Name="btnShift" Grid.Column="1" Command="{Binding DataContext.ShiftCommand,ElementName=MainGrid}" />
         </Grid>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
@@ -74,7 +74,7 @@
                 <ColumnDefinition Width="145*" />
             </Grid.ColumnDefinitions>
             <Button Name="btnSpace" Margin="1" Content="Space" Command="{Binding DataContext.SpaceCommand,ElementName=MainGrid}" />
-            <Button Name="btnChangeLang" Margin="1" Content="Eng/Rus" Grid.Column="1" Command="{Binding DataContext.ChangeLangCommand,ElementName=MainGrid}" />
+            <Button Name="btnChangeLang" Background="#3D454B" Margin="1" Content="Eng/Rus" Grid.Column="1" Command="{Binding DataContext.ChangeLangCommand,ElementName=MainGrid}" />
         </Grid>
         <Grid.Resources>
             <ResourceDictionary>
@@ -139,9 +139,9 @@
             <Color x:Key="KeyForegroundColor">#FFFFFF</Color>
             <Color x:Key="ControlKeyBackgroundColor">#3D454B</Color>
 
-            <SolidColorBrush x:Key="KeyBackgroundBrush">#2D3235</SolidColorBrush>
-            <SolidColorBrush x:Key="KeyForegroundBrush">#FFFFFF</SolidColorBrush>
-            <SolidColorBrush x:Key="ControlKeyBackgroundBrush">#3D454B</SolidColorBrush>
+            <SolidColorBrush x:Key="KeyBackgroundBrush" Color="{StaticResource KeyBackgroundColor}"/>
+            <SolidColorBrush x:Key="KeyForegroundBrush" Color="{StaticResource KeyForegroundColor}"/>
+            <SolidColorBrush x:Key="ControlKeyBackgroundBrush" Color="{StaticResource ControlKeyBackgroundColor}"/>
 
             <Style x:Key="FocusVisual">
                 <Setter Property="Control.Template">
@@ -168,14 +168,13 @@
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="Padding" Value="16 4 16 4"/>
-                <Setter Property="Height" Value="32" />
+                <Setter Property="Padding" Value="10 4 10 4"/>
                 <Setter Property="materialDesign:ButtonProgressAssist.IsIndicatorVisible" Value="False" />
                 <Setter Property="materialDesign:ButtonProgressAssist.Opacity" Value=".4" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ButtonBase}">
-                            <Grid Margin="2.5">
+                            <Grid Margin="4">
                                 <Grid>
                                     <Border Background="{TemplateBinding Background}" CornerRadius="7"
                                             BorderThickness="{TemplateBinding BorderThickness}"

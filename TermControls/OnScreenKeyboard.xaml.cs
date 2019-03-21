@@ -8,12 +8,12 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+
 namespace TermControls
 {
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Input;
-
     /// <summary>
     ///     The on screen keyboard.
     /// </summary>
@@ -37,11 +37,11 @@ namespace TermControls
             typeof(OnScreenKeyboard));
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OnScreenKeyboard"/> class. 
+        ///     Initializes a new instance of the <see cref="OnScreenKeyboard" /> class.
         /// </summary>
         public OnScreenKeyboard()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         /// <summary>
@@ -49,15 +49,9 @@ namespace TermControls
         /// </summary>
         public string Text
         {
-            get
-            {
-                return (string)this.GetValue(TextProperty);
-            }
+            get => (string) GetValue(TextProperty);
 
-            set
-            {
-                this.SetValue(TextProperty, value);
-            }
+            set => SetValue(TextProperty, value);
         }
 
         /// <summary>
@@ -65,15 +59,9 @@ namespace TermControls
         /// </summary>
         public ICommand Command
         {
-            get
-            {
-                return (ICommand)this.GetValue(CommandProperty);
-            }
+            get => (ICommand) GetValue(CommandProperty);
 
-            set
-            {
-                this.SetValue(CommandProperty, value);
-            }
+            set => SetValue(CommandProperty, value);
         }
     }
 }

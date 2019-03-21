@@ -1,55 +1,54 @@
-﻿namespace TermControls.ViewModels
+﻿using System.Windows.Input;
+using TermControls.Commands;
+using TermControls.Models;
+
+namespace TermControls.ViewModels
 {
-    using System.Windows.Input;
-
-    using TermControls.Commands;
-    using TermControls.Models;
-
     public class KeyboardViewModel
     {
         public KeyboardViewModel()
         {
-            this.Model = new KeyboardModelRuEng();
-            this.Model.CreateButtons();
+            Model = new KeyboardModelRuEng();
+            Model.CreateButtons();
         }
 
         public KeyboardModel Model { get; set; }
 
-        public ICommand ChangeLangCommand => new DelegateCommand(this.ChangeLangClick);
+        public ICommand ChangeLangCommand => new DelegateCommand(ChangeLangClick);
+
+        public ICommand ShiftCommand => new DelegateCommand(ShiftClick);
+
+        public ICommand DeleteCommand => new DelegateCommand(DeleteClick);
+
+        public ICommand ButtonClickCommand => new DelegateCommand(ButtonClick);
+
+        public ICommand SpaceCommand => new DelegateCommand(SpaceClick);
 
         public void ChangeLangClick(object param)
         {
-            this.Model.IsEngRus = !this.Model.IsEngRus;
-            this.Model.ChangeButtonsContent();
+            Model.IsEngRus = !Model.IsEngRus;
+            Model.ChangeButtonsContent();
         }
-
-        public ICommand ShiftCommand => new DelegateCommand(this.ShiftClick);
 
         public void ShiftClick(object param)
         {
-            this.Model.IsShift = !this.Model.IsShift;
-            this.Model.ChangeButtonsContent();
+            Model.IsShift = !Model.IsShift;
+            Model.ChangeButtonsContent();
         }
-
-        public ICommand DeleteCommand => new DelegateCommand(this.DeleteClick);
 
         public void DeleteClick(object param)
         {
-            if (!string.IsNullOrEmpty(this.Model.Text)) this.Model.Text = this.Model.Text.Remove(this.Model.Text.Length - 1);
+            if (!string.IsNullOrEmpty(Model.Text)) Model.Text = Model.Text.Remove(Model.Text.Length - 1);
         }
-
-        public ICommand ButtonClickCommand => new DelegateCommand(this.ButtonClick);
 
         public void ButtonClick(object param)
         {
-            this.Model.Text += param.ToString();
+            Model.Text += param.ToString();
         }
-
-        public ICommand SpaceCommand => new DelegateCommand(this.SpaceClick);
 
         public void SpaceClick(object param)
         {
-            this.Model.Text += " ";
+            Model.Text += " ";
         }
     }
 }

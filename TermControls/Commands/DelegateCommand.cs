@@ -8,26 +8,26 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using System.Windows.Input;
+
 namespace TermControls.Commands
 {
-    using System;
-    using System.Windows.Input;
-
     /// <summary>
-    /// The delegate command.
+    ///     The delegate command.
     /// </summary>
     public class DelegateCommand : ICommand
     {
         /// <summary>
-        /// The action.
+        ///     The action.
         /// </summary>
         private readonly Action<object> action;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DelegateCommand"/> class.
+        ///     Initializes a new instance of the <see cref="DelegateCommand" /> class.
         /// </summary>
         /// <param name="action">
-        /// The action.
+        ///     The action.
         /// </param>
         public DelegateCommand(Action<object> action)
         {
@@ -35,38 +35,34 @@ namespace TermControls.Commands
         }
 
         /// <summary>
-        /// The can execute changed.
+        ///     The can execute changed.
         /// </summary>
         public event EventHandler CanExecuteChanged
         {
-            add
-            {
-            }
+            add { }
 
-            remove
-            {
-            }
+            remove { }
         }
 
         /// <summary>
-        /// The execute.
+        ///     The execute.
         /// </summary>
         /// <param name="parameter">
-        /// The parameter.
+        ///     The parameter.
         /// </param>
         public void Execute(object parameter)
         {
-            this.action(parameter);
+            action(parameter);
         }
 
         /// <summary>
-        /// The can execute.
+        ///     The can execute.
         /// </summary>
         /// <param name="parameter">
-        /// The parameter.
+        ///     The parameter.
         /// </param>
         /// <returns>
-        /// The <see cref="bool"/>.
+        ///     The <see cref="bool" />.
         /// </returns>
         public bool CanExecute(object parameter)
         {

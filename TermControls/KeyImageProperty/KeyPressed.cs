@@ -8,27 +8,27 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Windows;
+using System.Windows.Media;
+
 namespace TermControls.KeyImageProperty
 {
-    using System.Windows;
-    using System.Windows.Media;
-
     /// <summary>
-    /// The key pressed.
+    ///     The key pressed.
     /// </summary>
     public class KeyPressed
     {
         /// <summary>
-        /// The image property.
+        ///     The image property.
         /// </summary>
         public static readonly DependencyProperty ImageProperty;
 
         /// <summary>
-        /// Initializes static members of the <see cref="KeyPressed"/> class.
+        ///     Initializes static members of the <see cref="KeyPressed" /> class.
         /// </summary>
         static KeyPressed()
         {
-            var metadata = new FrameworkPropertyMetadata((ImageSource)null);
+            var metadata = new FrameworkPropertyMetadata((ImageSource) null);
             ImageProperty = DependencyProperty.RegisterAttached(
                 "Image",
                 typeof(ImageSource),
@@ -37,27 +37,27 @@ namespace TermControls.KeyImageProperty
         }
 
         /// <summary>
-        /// The get image.
+        ///     The get image.
         /// </summary>
         /// <param name="obj">
-        /// The object.
+        ///     The object.
         /// </param>
         /// <returns>
-        /// The <see cref="ImageSource"/>.
+        ///     The <see cref="ImageSource" />.
         /// </returns>
         public static ImageSource GetImage(DependencyObject obj)
         {
-            return (ImageSource)obj.GetValue(ImageProperty);
+            return (ImageSource) obj.GetValue(ImageProperty);
         }
 
         /// <summary>
-        /// The set image.
+        ///     The set image.
         /// </summary>
         /// <param name="obj">
-        /// The object.
+        ///     The object.
         /// </param>
         /// <param name="value">
-        /// The value.
+        ///     The value.
         /// </param>
         public static void SetImage(DependencyObject obj, ImageSource value)
         {

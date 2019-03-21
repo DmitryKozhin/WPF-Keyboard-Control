@@ -4,10 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
+             Background="#262B2C"
              xmlns:local="clr-namespace:TermControls"
              xmlns:viewmodel="clr-namespace:TermControls.ViewModels"
              xmlns:helpers="clr-namespace:TermControls.Helpers"
              xmlns:keyImageProperty="clr-namespace:TermControls.KeyImageProperty"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
              x:Name="usercontrol" >
     <Grid Name="MainGrid" helpers:GridAutoLayout.NumberOfRows="5">
         <Grid.DataContext>
@@ -25,9 +28,9 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <Button keyImageProperty:KeyPressed.Image="{DynamicResource ResourceKey=gdelete}" keyImageProperty:KeyNotPressed.Image="{DynamicResource ResourceKey=delete}" Template="{DynamicResource ResourceKey=KeyboardButton}" Name="btnDel" Grid.Column="1" Command="{Binding DataContext.DeleteCommand,ElementName=MainGrid}" />
+            <Button Content="Backspace" Margin="1" Name="btnDel" Grid.Column="1" Command="{Binding DataContext.DeleteCommand,ElementName=MainGrid}" />
         </Grid>
-        
+
         <Grid Margin="30,0,0,0" Grid.Row="1">
             <ItemsControl ItemsSource="{Binding Model.ButtonsRaw2}" x:Name="ListView2" ItemTemplate="{DynamicResource ResourceKey=itemContDataTemplate}" ItemContainerStyle="{DynamicResource ResourceKey=itemContStyle}">
                 <ItemsControl.ItemsPanel>
@@ -49,7 +52,7 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <Button keyImageProperty:KeyPressed.Image="{DynamicResource ResourceKey=genter}" keyImageProperty:KeyNotPressed.Image="{DynamicResource ResourceKey=enter}" Template="{DynamicResource ResourceKey=KeyboardButton}" Name="btnEnter" Grid.Column="1" Command="{Binding Command,ElementName=usercontrol}"  />
+            <Button Content="Enter" Margin="1" Name="btnEnter" Grid.Column="1" Command="{Binding Command,ElementName=usercontrol}"  />
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
@@ -63,34 +66,30 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <Button keyImageProperty:KeyPressed.Image="{DynamicResource ResourceKey=gshift}" keyImageProperty:KeyNotPressed.Image="{DynamicResource ResourceKey=shift}" Template="{DynamicResource ResourceKey=KeyboardButton}" Name="btnShift" Grid.Column="1" Command="{Binding DataContext.ShiftCommand,ElementName=MainGrid}" />
+            <Button Content="Shift" Margin="1" Name="btnShift" Grid.Column="1" Command="{Binding DataContext.ShiftCommand,ElementName=MainGrid}" />
         </Grid>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="690*" />
                 <ColumnDefinition Width="145*" />
             </Grid.ColumnDefinitions>
-            <Button keyImageProperty:KeyPressed.Image="{DynamicResource ResourceKey=gprobel}" keyImageProperty:KeyNotPressed.Image="{DynamicResource ResourceKey=probel}" Template="{DynamicResource ResourceKey=KeyboardButton}" Name="btnSpace" Command="{Binding DataContext.SpaceCommand,ElementName=MainGrid}" />
-            <Button keyImageProperty:KeyPressed.Image="{DynamicResource ResourceKey=gEngRus}" keyImageProperty:KeyNotPressed.Image="{DynamicResource ResourceKey=EngRus}" Template="{DynamicResource ResourceKey=KeyboardButton}" Name="btnChangeLang" Grid.Column="1" Command="{Binding DataContext.ChangeLangCommand,ElementName=MainGrid}" />
+            <Button Name="btnSpace" Margin="1" Content="Space" Command="{Binding DataContext.SpaceCommand,ElementName=MainGrid}" />
+            <Button Name="btnChangeLang" Margin="1" Content="Eng/Rus" Grid.Column="1" Command="{Binding DataContext.ChangeLangCommand,ElementName=MainGrid}" />
         </Grid>
         <Grid.Resources>
             <ResourceDictionary>
                 <!-- Img sources-->
                 <ImageSource x:Key="EngRus">/TermControls;component/Images/Eng-Rus.png</ImageSource>
                 <ImageSource x:Key="gEngRus">/TermControls;component/Images/gEng-Rus.png</ImageSource>
-                <ImageSource x:Key="button70x70">/TermControls;component/Images/button-70x70.png</ImageSource>
-                <ImageSource x:Key="gbutton70x70">/TermControls;component/Images/gbutton-70x70.png</ImageSource>
                 <ImageSource x:Key="delete">/TermControls;component/Images/delete.png</ImageSource>
                 <ImageSource x:Key="gdelete">/TermControls;component/Images/g-delete.png</ImageSource>
                 <ImageSource x:Key="enter">/TermControls;component/Images/enter.png</ImageSource>
                 <ImageSource x:Key="genter">/TermControls;component/Images/g-enter.png</ImageSource>
-                <ImageSource x:Key="probel">/TermControls;component/Images/probel.png</ImageSource>
-                <ImageSource x:Key="gprobel">/TermControls;component/Images/gprobel.png</ImageSource>
                 <ImageSource x:Key="shift">/TermControls;component/Images/shift.png</ImageSource>
                 <ImageSource x:Key="gshift">/TermControls;component/Images/g-shift.png</ImageSource>
 
                 <ControlTemplate x:Key="SimpleBtn" TargetType="Button">
-                    <Button CommandParameter="{Binding Content}" Command="{Binding Path=DataContext.ButtonClickCommand,ElementName=MainGrid}" keyImageProperty:KeyPressed.Image="{DynamicResource ResourceKey=gbutton70x70}" keyImageProperty:KeyNotPressed.Image="{DynamicResource ResourceKey=button70x70}" Template="{DynamicResource ResourceKey=KeyboardButton}" Content="{TemplateBinding Content}"  FontSize="{TemplateBinding FontSize}" FontWeight="Normal"   />
+                    <Button CommandParameter="{Binding Content}" Command="{Binding Path=DataContext.ButtonClickCommand,ElementName=MainGrid}"  Content="{TemplateBinding Content}"  FontSize="{TemplateBinding FontSize}" FontWeight="Normal"   />
                 </ControlTemplate>
 
                 <Style TargetType="{x:Type FrameworkElement}"  x:Key="itemContStyle">
@@ -103,7 +102,7 @@
 
                 <ControlTemplate x:Key="KeyboardButton" TargetType="Button">
                     <Grid>
-                        <Image   Name="imgSource" Source="{Binding Path=(keyImageProperty:KeyNotPressed.Image),
+                        <Image Name="imgSource" Source="{Binding Path=(keyImageProperty:KeyNotPressed.Image),
                      RelativeSource={RelativeSource FindAncestor,
                        AncestorType={x:Type Button}}}" >
                         </Image>
@@ -118,14 +117,90 @@
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
-                
+
             </ResourceDictionary>
         </Grid.Resources>
     </Grid>
-    
+
     <UserControl.Resources>
-        <Style TargetType="local:OnScreenKeyboard">
-            <Setter Property="Text" Value="{Binding Path=DataContext.Model.Text, Mode=TwoWay,ElementName=MainGrid}"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Color x:Key="KeyBackgroundColor">#2D3235</Color>
+            <Color x:Key="KeyForegroundColor">#FFFFFF</Color>
+            <Color x:Key="ControlKeyBackgroundColor">#3D454B</Color>
+
+            <SolidColorBrush x:Key="KeyBackgroundBrush">#2D3235</SolidColorBrush>
+            <SolidColorBrush x:Key="KeyForegroundBrush">#FFFFFF</SolidColorBrush>
+            <SolidColorBrush x:Key="ControlKeyBackgroundBrush">#3D454B</SolidColorBrush>
+
+            <Style x:Key="FocusVisual">
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Ellipse Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+                <Setter Property="Background" Value="{StaticResource KeyBackgroundBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource KeyBackgroundBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource KeyForegroundBrush}"/>
+                <Setter Property="materialDesign:ButtonProgressAssist.IndicatorForeground" Value="{StaticResource KeyForegroundBrush}" />
+                <Setter Property="materialDesign:ButtonProgressAssist.IndicatorBackground" Value="{StaticResource KeyBackgroundBrush}" />
+                <Setter Property="materialDesign:RippleAssist.Feedback" Value="White" />
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth1" />
+                <Setter Property="TextBlock.FontWeight" Value="Medium"/>
+                <Setter Property="TextBlock.FontSize" Value="14"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="16 4 16 4"/>
+                <Setter Property="Height" Value="32" />
+                <Setter Property="materialDesign:ButtonProgressAssist.IsIndicatorVisible" Value="False" />
+                <Setter Property="materialDesign:ButtonProgressAssist.Opacity" Value=".4" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ButtonBase}">
+                            <Grid Margin="2.5">
+                                <Grid>
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="7"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"                                    
+                                            x:Name="border"
+                                            Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ShadowAssist.ShadowDepth), Converter={x:Static converters:ShadowConverter.Instance}}" />
+                                </Grid>
+                                <materialDesign:Ripple Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False"     
+                                                       ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                       HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                       VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                       Padding="{TemplateBinding Padding}" 
+                                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <Grid.Effect>
+                                    <DropShadowEffect Color="{StaticResource KeyBackgroundColor}" BlurRadius="15" RenderingBias="Quality" ShadowDepth="8" Opacity=".5"/>
+                                </Grid.Effect>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="local:OnScreenKeyboard">
+                <Setter Property="Text" Value="{Binding Path=DataContext.Model.Text, Mode=TwoWay,ElementName=MainGrid}"/>
+            </Style>
+        </ResourceDictionary>
     </UserControl.Resources>
 </UserControl>

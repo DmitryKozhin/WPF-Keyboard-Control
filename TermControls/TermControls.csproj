@@ -99,48 +99,6 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\button-70x70.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\delete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\enter.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\gbutton-70x70.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\g-delete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\g-enter.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\gprobel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\g-shift.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\ok.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\okG.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\probel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\shift.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\gEng-Rus.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Eng-Rus.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

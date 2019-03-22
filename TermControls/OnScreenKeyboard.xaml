@@ -21,18 +21,25 @@
                 <ColumnDefinition Width="770*" />
                 <ColumnDefinition Width="160*" />
             </Grid.ColumnDefinitions>
-            <ItemsControl ItemsSource="{Binding Model.ButtonsRaw1}" x:Name="ListView1" ItemTemplate="{DynamicResource ResourceKey=itemContDataTemplate}" ItemContainerStyle="{DynamicResource ResourceKey=itemContStyle}">
+            <ItemsControl ItemsSource="{Binding Model.ButtonsRaw1}"
+                          ItemTemplate="{DynamicResource ResourceKey=itemContDataTemplate}" ItemContainerStyle="{DynamicResource ResourceKey=itemContStyle}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Grid helpers:GridAutoLayout.NumberOfColumns="{Binding Model.ButtonsRaw1.Count}" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <Button Content="Backspace" Background="#3D454B" Margin="1" Name="btnDel" Grid.Column="1" Command="{Binding DataContext.DeleteCommand,ElementName=MainGrid}" />
+            <Button Background="#3D454B" 
+                    Margin="1"
+                    Grid.Column="1"
+                    Command="{Binding DataContext.DeleteCommand,ElementName=MainGrid}">
+                <materialDesign:PackIcon Kind="Backspace" />
+            </Button>
         </Grid>
 
         <Grid Margin="30,0,0,0" Grid.Row="1">
-            <ItemsControl ItemsSource="{Binding Model.ButtonsRaw2}" x:Name="ListView2" ItemTemplate="{DynamicResource ResourceKey=itemContDataTemplate}" ItemContainerStyle="{DynamicResource ResourceKey=itemContStyle}">
+            <ItemsControl ItemsSource="{Binding Model.ButtonsRaw2}"
+                          ItemTemplate="{DynamicResource ResourceKey=itemContDataTemplate}" ItemContainerStyle="{DynamicResource ResourceKey=itemContStyle}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Grid helpers:GridAutoLayout.NumberOfColumns="{Binding Model.ButtonsRaw2.Count}" />
@@ -45,14 +52,20 @@
                 <ColumnDefinition Width="792*" />
                 <ColumnDefinition Width="115*" />
             </Grid.ColumnDefinitions>
-            <ItemsControl ItemsSource="{Binding Model.ButtonsRaw3}" x:Name="ListView3" ItemTemplate="{DynamicResource ResourceKey=itemContDataTemplate}" ItemContainerStyle="{DynamicResource ResourceKey=itemContStyle}">
+            <ItemsControl ItemsSource="{Binding Model.ButtonsRaw3}"
+                          ItemTemplate="{DynamicResource ResourceKey=itemContDataTemplate}" ItemContainerStyle="{DynamicResource ResourceKey=itemContStyle}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Grid helpers:GridAutoLayout.NumberOfColumns="{Binding Model.ButtonsRaw3.Count}" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <Button Content="Enter" Background="#3D454B" Margin="1" Name="btnEnter" Grid.Column="1" Command="{Binding Command,ElementName=usercontrol}"  />
+            <Button Content="return" 
+                    Background="#3D454B"
+                    Foreground="#2DCA60"
+                    Margin="1"
+                    Grid.Column="1" 
+                    Command="{Binding Command,ElementName=usercontrol}"  />
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
@@ -66,28 +79,23 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <Button Content="Shift" Background="#3D454B" Margin="1" Name="btnShift" Grid.Column="1" Command="{Binding DataContext.ShiftCommand,ElementName=MainGrid}" />
+            <Button Background="#3D454B" 
+                    Margin="1"
+                    Grid.Column="1" 
+                    Command="{Binding DataContext.ShiftCommand,ElementName=MainGrid}">
+                <materialDesign:PackIcon Kind="ArrowUp" />
+            </Button>
         </Grid>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="690*" />
                 <ColumnDefinition Width="145*" />
             </Grid.ColumnDefinitions>
-            <Button Name="btnSpace" Margin="1" Content="Space" Command="{Binding DataContext.SpaceCommand,ElementName=MainGrid}" />
-            <Button Name="btnChangeLang" Background="#3D454B" Margin="1" Content="Eng/Rus" Grid.Column="1" Command="{Binding DataContext.ChangeLangCommand,ElementName=MainGrid}" />
+            <Button Margin="1" Content="space" Command="{Binding DataContext.SpaceCommand,ElementName=MainGrid}" />
+            <Button Background="#3D454B" Margin="1" Content="ru" Grid.Column="1" Command="{Binding DataContext.ChangeLangCommand,ElementName=MainGrid}" />
         </Grid>
         <Grid.Resources>
             <ResourceDictionary>
-                <!-- Img sources-->
-                <ImageSource x:Key="EngRus">/TermControls;component/Images/Eng-Rus.png</ImageSource>
-                <ImageSource x:Key="gEngRus">/TermControls;component/Images/gEng-Rus.png</ImageSource>
-                <ImageSource x:Key="delete">/TermControls;component/Images/delete.png</ImageSource>
-                <ImageSource x:Key="gdelete">/TermControls;component/Images/g-delete.png</ImageSource>
-                <ImageSource x:Key="enter">/TermControls;component/Images/enter.png</ImageSource>
-                <ImageSource x:Key="genter">/TermControls;component/Images/g-enter.png</ImageSource>
-                <ImageSource x:Key="shift">/TermControls;component/Images/shift.png</ImageSource>
-                <ImageSource x:Key="gshift">/TermControls;component/Images/g-shift.png</ImageSource>
-
                 <ControlTemplate x:Key="SimpleBtn" TargetType="Button">
                     <Button CommandParameter="{Binding Content}" Command="{Binding Path=DataContext.ButtonClickCommand,ElementName=MainGrid}"  Content="{TemplateBinding Content}"  FontSize="{TemplateBinding FontSize}" FontWeight="Normal"   />
                 </ControlTemplate>
@@ -99,24 +107,6 @@
                 <DataTemplate x:Key="itemContDataTemplate">
                     <Button Template="{DynamicResource ResourceKey=SimpleBtn}"  FontSize="20" Content="{Binding Content}"     />
                 </DataTemplate>
-
-                <ControlTemplate x:Key="KeyboardButton" TargetType="Button">
-                    <Grid>
-                        <Image Name="imgSource" Source="{Binding Path=(keyImageProperty:KeyNotPressed.Image),
-                     RelativeSource={RelativeSource FindAncestor,
-                       AncestorType={x:Type Button}}}" >
-                        </Image>
-                        <TextBlock Text="{TemplateBinding Content}" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="Button.IsPressed" Value="True">
-                            <Setter TargetName="imgSource" Property="Source" 
-                                        Value="{Binding Path=(keyImageProperty:KeyPressed.Image),
-                     RelativeSource={RelativeSource FindAncestor,
-                       AncestorType={x:Type Button}}}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
 
             </ResourceDictionary>
         </Grid.Resources>
@@ -137,11 +127,9 @@
 
             <Color x:Key="KeyBackgroundColor">#2D3235</Color>
             <Color x:Key="KeyForegroundColor">#FFFFFF</Color>
-            <Color x:Key="ControlKeyBackgroundColor">#3D454B</Color>
 
             <SolidColorBrush x:Key="KeyBackgroundBrush" Color="{StaticResource KeyBackgroundColor}"/>
             <SolidColorBrush x:Key="KeyForegroundBrush" Color="{StaticResource KeyForegroundColor}"/>
-            <SolidColorBrush x:Key="ControlKeyBackgroundBrush" Color="{StaticResource ControlKeyBackgroundColor}"/>
 
             <Style x:Key="FocusVisual">
                 <Setter Property="Control.Template">

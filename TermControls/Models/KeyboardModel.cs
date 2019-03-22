@@ -35,9 +35,19 @@ namespace TermControls.Models
         protected string[] Content2Shift { get; set; }
 
         /// <summary>
+        ///     Gets or sets the content 3.
+        /// </summary>
+        protected string[] Content3 { get; set; }
+
+        /// <summary>
         ///     Gets or sets a value indicating whether is shift.
         /// </summary>
         public bool IsShift { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether is shift.
+        /// </summary>
+        public bool IsSymbols { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether is eng rus.
@@ -51,6 +61,7 @@ namespace TermControls.Models
         {
             get
             {
+                if (IsSymbols) return Content3;
                 if (!IsShift && IsEngRus) return Content1;
                 if (IsShift && IsEngRus) return Content1Shift;
                 if (!IsShift && !IsEngRus) return Content2;
@@ -73,11 +84,6 @@ namespace TermControls.Models
         ///     Gets the buttons raw 3.
         /// </summary>
         public ObservableCollection<ButtonModel> ButtonsRaw3 { get; private set; }
-
-        /// <summary>
-        ///     Gets the buttons raw 4.
-        /// </summary>
-        public ObservableCollection<ButtonModel> ButtonsRaw4 { get; private set; }
 
         /// <summary>
         ///     Gets or sets the text.
@@ -120,7 +126,6 @@ namespace TermControls.Models
             ChangeButtonsContent(ButtonsRaw1, 0);
             ChangeButtonsContent(ButtonsRaw2, 1);
             ChangeButtonsContent(ButtonsRaw3, 2);
-            ChangeButtonsContent(ButtonsRaw4, 3);
         }
 
         /// <summary>
@@ -131,13 +136,12 @@ namespace TermControls.Models
             ButtonsRaw1 = CreateButtons(0);
             ButtonsRaw2 = CreateButtons(1);
             ButtonsRaw3 = CreateButtons(2);
-            ButtonsRaw4 = CreateButtons(3);
         }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="KeyboardModel" /> class.
         /// </summary>
-        public KeyboardModel()
+        protected KeyboardModel()
         {
             IsShift = false;
             IsEngRus = false;
@@ -147,7 +151,7 @@ namespace TermControls.Models
         /// <summary>
         ///     The init content.
         /// </summary>
-        public virtual void InitContent()
+        protected virtual void InitContent()
         {
         }
 
@@ -176,15 +180,19 @@ namespace TermControls.Models
         ///     The change buttons content.
         /// </summary>
         /// <param name="buttons">
-        ///     The _buttons.
+        ///     The buttons.
         /// </param>
-        /// <param name="_raw">
-        ///     The _raw.
+        /// <param name="raw">
+        ///     The raw.
         /// </param>
-        private void ChangeButtonsContent(ObservableCollection<ButtonModel> buttons, int _raw)
+        private void ChangeButtonsContent(ObservableCollection<ButtonModel> buttons, int raw)
         {
-            for (var j = 1; j <= Content[_raw].Length; j++)
-                buttons[j - 1].Content = GetButtonContent(buttons[j - 1].Name);
+            buttons.Clear();
+            for (var j = 1; j <= Content[raw].Length; j++)
+            {
+                var name = $"b{raw + 1}{j}";
+                buttons.Add(new ButtonModel { Name = name, Column = j - 1, Content = GetButtonContent(name) });
+            }
         }
 
         #endregion

@@ -12,15 +12,11 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
              x:Name="usercontrol" >
-    <Grid Name="MainGrid" helpers:GridAutoLayout.NumberOfRows="5">
+    <Grid Name="MainGrid" helpers:GridAutoLayout.NumberOfRows="4">
         <Grid.DataContext>
             <viewmodel:KeyboardViewModel />
         </Grid.DataContext>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="770*" />
-                <ColumnDefinition Width="160*" />
-            </Grid.ColumnDefinitions>
+        <Grid Margin="10,0,0,0" Grid.Row="0">
             <ItemsControl ItemsSource="{Binding Model.ButtonsRaw1}"
                           ItemTemplate="{DynamicResource ResourceKey=itemContDataTemplate}" ItemContainerStyle="{DynamicResource ResourceKey=itemContStyle}">
                 <ItemsControl.ItemsPanel>
@@ -29,15 +25,8 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <Button Background="#3D454B" 
-                    Margin="1"
-                    Grid.Column="1"
-                    Command="{Binding DataContext.DeleteCommand,ElementName=MainGrid}">
-                <materialDesign:PackIcon Kind="Backspace" />
-            </Button>
         </Grid>
-
-        <Grid Margin="30,0,0,0" Grid.Row="1">
+        <Grid Margin="25,0,30,0" Grid.Row="1">
             <ItemsControl ItemsSource="{Binding Model.ButtonsRaw2}"
                           ItemTemplate="{DynamicResource ResourceKey=itemContDataTemplate}" ItemContainerStyle="{DynamicResource ResourceKey=itemContStyle}">
                 <ItemsControl.ItemsPanel>
@@ -47,52 +36,58 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </Grid>
-        <Grid Margin="43,0,0,0" Grid.Row="2">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="792*" />
-                <ColumnDefinition Width="115*" />
+                <ColumnDefinition Width="85*" />
+                <ColumnDefinition Width="864*" />
+                <ColumnDefinition Width="85*" />
             </Grid.ColumnDefinitions>
             <ItemsControl ItemsSource="{Binding Model.ButtonsRaw3}"
-                          ItemTemplate="{DynamicResource ResourceKey=itemContDataTemplate}" ItemContainerStyle="{DynamicResource ResourceKey=itemContStyle}">
+                          Grid.Column="1"
+                          ItemTemplate="{DynamicResource ResourceKey=itemContDataTemplate}" 
+                          ItemContainerStyle="{DynamicResource ResourceKey=itemContStyle}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Grid helpers:GridAutoLayout.NumberOfColumns="{Binding Model.ButtonsRaw3.Count}" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <Button Content="return" 
-                    Background="#3D454B"
-                    Foreground="#2DCA60"
+            <Button Background="#3D454B" 
                     Margin="1"
-                    Grid.Column="1" 
-                    Command="{Binding Command,ElementName=usercontrol}"  />
+                    Grid.Column="2"
+                    Command="{Binding DataContext.DeleteCommand,ElementName=MainGrid}">
+                <materialDesign:PackIcon Kind="Backspace" />
+            </Button>
+            <Button Background="#3D454B" 
+                    Margin="1"
+                    Grid.Column="0"
+                    Command="{Binding DataContext.ShiftCommand,ElementName=MainGrid}">
+                <Button.Content>
+                    <materialDesign:PackIcon Kind="{Binding ShiftKind}"/>
+                </Button.Content>
+            </Button>
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="864*" />
-                <ColumnDefinition Width="85*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.6*" />
+                <ColumnDefinition Width="0.2*" />
             </Grid.ColumnDefinitions>
-            <ItemsControl ItemsSource="{Binding Model.ButtonsRaw4}" x:Name="ListView4" ItemTemplate="{DynamicResource ResourceKey=itemContDataTemplate}" ItemContainerStyle="{DynamicResource ResourceKey=itemContStyle}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Grid helpers:GridAutoLayout.NumberOfColumns="{Binding Model.ButtonsRaw4.Count}" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-            <Button Background="#3D454B" 
+            <Button Background="#3D454B" Margin="1" 
+                    Content="{Binding ChangeSymbolsButtonContent}" Grid.Column="0"
+                    Command="{Binding ChangeSymbolsCommand}"/>
+            <Button Background="#3D454B" Margin="1" 
+                    Content="{Binding SwitchLangButtonContent}" Grid.Column="1" 
+                    Command="{Binding DataContext.ChangeLangCommand,ElementName=MainGrid}" />
+            <Button Margin="1" Content="{Binding SpaceButtonContent}" Grid.Column="2"
+                    Command="{Binding DataContext.SpaceCommand,ElementName=MainGrid}" />
+            <Button Content="{Binding EnterButtonContent}" 
+                    Background="#3D454B"
+                    Foreground="#2DCA60"
                     Margin="1"
-                    Grid.Column="1" 
-                    Command="{Binding DataContext.ShiftCommand,ElementName=MainGrid}">
-                <materialDesign:PackIcon Kind="ArrowUp" />
-            </Button>
-        </Grid>
-        <Grid Grid.Row="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="690*" />
-                <ColumnDefinition Width="145*" />
-            </Grid.ColumnDefinitions>
-            <Button Margin="1" Content="space" Command="{Binding DataContext.SpaceCommand,ElementName=MainGrid}" />
-            <Button Background="#3D454B" Margin="1" Content="ru" Grid.Column="1" Command="{Binding DataContext.ChangeLangCommand,ElementName=MainGrid}" />
+                    Grid.Column="3" 
+                    Command="{Binding Command,ElementName=usercontrol}"  />
         </Grid>
         <Grid.Resources>
             <ResourceDictionary>
@@ -148,7 +143,7 @@
                 <Setter Property="Foreground" Value="{StaticResource KeyForegroundBrush}"/>
                 <Setter Property="materialDesign:ButtonProgressAssist.IndicatorForeground" Value="{StaticResource KeyForegroundBrush}" />
                 <Setter Property="materialDesign:ButtonProgressAssist.IndicatorBackground" Value="{StaticResource KeyBackgroundBrush}" />
-                <Setter Property="materialDesign:RippleAssist.Feedback" Value="White" />
+                <Setter Property="materialDesign:RippleAssist.Feedback" Value="LightGray" />
                 <Setter Property="Cursor" Value="Hand"/>
                 <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth1" />
                 <Setter Property="TextBlock.FontWeight" Value="Medium"/>
@@ -156,7 +151,7 @@
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="Padding" Value="10 4 10 4"/>
+                <Setter Property="Padding" Value="10 5 10 5"/>
                 <Setter Property="materialDesign:ButtonProgressAssist.IsIndicatorVisible" Value="False" />
                 <Setter Property="materialDesign:ButtonProgressAssist.Opacity" Value=".4" />
                 <Setter Property="Template">

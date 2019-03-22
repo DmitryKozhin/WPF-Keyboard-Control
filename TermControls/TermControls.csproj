@@ -69,7 +69,7 @@
     <Compile Include="KeyImageProperty\KeyPressed.cs" />
     <Compile Include="Models\ButtonModel.cs" />
     <Compile Include="Models\KeyboardModel.cs" />
-    <Compile Include="Models\KeyboardModelRuEng.cs" />
+    <Compile Include="Models\KeyboardModelSymbols.cs" />
     <Compile Include="OnScreenKeyboard.xaml.cs">
       <DependentUpon>OnScreenKeyboard.xaml</DependentUpon>
     </Compile>
